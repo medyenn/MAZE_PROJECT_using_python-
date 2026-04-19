@@ -1,4 +1,4 @@
-*This project has been created as part of the 42 curriculum by mennih, aaheddar.*
+*This project has been created by mennih*
 
 # A-Maze-ing
 
@@ -183,27 +183,6 @@ BFS is also well-suited for grid-based structures like mazes, where each cell ca
 
 Finally, BFS provides a straightforward way to reconstruct the solution path using parent tracking, making it both reliable and easy to integrate with the rendering system.
 
-## Reusable Module
-
-The maze generator is implemented as a reusable module (`mazegen`).
-
-Example usage:
-
-```python
-from maze_generator import MazeGenerator
-
-maze = MazeGenerator(width=10, height=8, entry=(0,0), exit=(9,7))
-maze.generate()
-solution = maze.solve()
-```
-
-### Features:
-
-* Generate maze with custom parameters
-* Access grid structure
-* Solve maze (shortest path)
-* Export to hexadecimal format
-
 ---
 
 ## Resources and AI Use
@@ -226,23 +205,6 @@ AI was used for:
 All generated content was reviewed, tested, and validated by the team.
 
 ---
-
-## Team and Project Management
-
-### Roles:
-
-* aaheddar: maze generation, parsing
-* mennih: maze solver, renderer, integration
-
-### Planning:
-
-Initial plan was to separate generation, solving, and rendering.
-During development, the structure evolved into a modular architecture coordinated by the main file.
-
-### What worked well:
-
-* Clear separation of concerns
-* Modular design
 
 ### Tools Used:
 
