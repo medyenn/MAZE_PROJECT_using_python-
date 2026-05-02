@@ -1,4 +1,4 @@
-*This project has been created by mennih*
+*This project has been created by ENNEEX*
 
 # A-Maze-ing
 

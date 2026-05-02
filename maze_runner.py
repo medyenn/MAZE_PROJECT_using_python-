@@ -1,13 +1,20 @@
-""""Main entry point for the A-Maze-ing project."""
+""""Main entry point for the Maze project."""
 
 from __future__ import annotations
 
 import sys
 from typing import Optional
 
-from implementation_pack.config_parser import ConfigError, ConfigParser, MazeConfig
+from implementation_pack.config_parser import (
+    ConfigError,
+    ConfigParser,
+    MazeConfig)
+from implementation_pack.maze_renderer import (
+    MazeRenderer,
+    draw_cell,
+    draw_path_connector,
+    color)
 from implementation_pack.maze_generator import MazeGenerator, SolutionResult
-from implementation_pack.maze_renderer import MazeRenderer, draw_cell, draw_path_connector, color
 
 
 RESET = "\033[0m"
@@ -170,8 +177,9 @@ def print_menu(
     print(
         W + "│" + R + f"  {L}[6]{R} Pattern color {pat_ref}[{pat_name}]"
         f"{R}" + "\t" * 2 + W + "│" + R)
-    print(W + "│" + R + f"  {L}[7]{R} Anim speed    {V}[{speed_name}]{R}" +
-           "\t" * 2 + W + "│" + R)
+    print(
+        W + "│" + R + f"  {L}[7]{R} Anim speed    {V}[{speed_name}]{R}" +
+        "\t" * 2 + W + "│" + R)
     print(
         W + "│" + R + f"  {L}[8]{R} Perfect mode  {V}[{config.perfect}]"
         f"{R}" + "\t" * 2 + W + "│" + R)
@@ -205,8 +213,9 @@ def _color_submenu(
             print(
                 C_BORDER + "│" + RESET + line + pad + C_BORDER + "│" + RESET)
 
-        print(C_BORDER + "│" + RESET + f"  {C_LABEL}[ 0]{RESET} ← Go back" +
-               "\t" * 3 + "   " + C_BORDER + "│" + RESET)
+        print(
+            C_BORDER + "│" + RESET + f"  {C_LABEL}[ 0]{RESET} ← Go back"
+            "\t" * 3 + "   " + C_BORDER + "│" + RESET)
         print(C_BORDER + "└" + "─" * 42 + "┘" + RESET)
 
         if invalid:
@@ -251,8 +260,9 @@ def _speed_submenu(
             C_BORDER + "│" + RESET + f"  {C_LABEL}[2]{RESET} Slow"
             f"  {C_DIM}(0.08s / cell)"
             f"{RESET}" + "\t" * 2 + "   " + C_BORDER + "│" + RESET)
-        print(C_BORDER + "│" + RESET + f"  {C_LABEL}[0]{RESET} ← Go back" +
-               "\t" * 3 + "   " + C_BORDER + "│" + RESET)
+        print(
+            C_BORDER + "│" + RESET + f"  {C_LABEL}[0]{RESET} ← Go back"
+            "\t" * 3 + "   " + C_BORDER + "│" + RESET)
         print(C_BORDER + "└" + "─" * 42 + "┘" + RESET)
 
         if invalid:
