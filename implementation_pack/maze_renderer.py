@@ -20,10 +20,10 @@ def color(code: int) -> str:
 DEFAULT_COLORS: Dict[str, str] = {
     "wall":    color(28),
     "floor":   RESET,
-    "entry":   color(226),
-    "exit":    color(196),
+    "entry":   color(53),
+    "exit":    color(148),
     "path":    color(20),
-    "visited": color(39),
+    "visited": color(27),
     "pattern": color(52),
 }
 

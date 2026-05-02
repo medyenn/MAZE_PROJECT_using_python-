@@ -34,15 +34,15 @@ C_WARN = "\033[38;5;214m"
 COLOR_OPTIONS = [
     ("Green",     40),
     ("Cyan",      51),
-    ("Blue",      27),
+    ("Blue",      39),
     ("Purple",    57),
     ("Pink",     213),
     ("Orange",   202),
     ("Yellow",   226),
     ("Red",      196),
-    ("Teal",      30),
+    ("Teal",      6),
     ("Lavender", 141),
-    ("White",    255),
+    ("White",    15),
     ("Crimson",  88),
 ]
 
@@ -215,7 +215,7 @@ def _color_submenu(
 
         print(
             C_BORDER + "│" + RESET + f"  {C_LABEL}[ 0]{RESET} ← Go back"
-            "\t" * 3 + "   " + C_BORDER + "│" + RESET)
+            + "\t" * 3 + "   " + C_BORDER + "│" + RESET)
         print(C_BORDER + "└" + "─" * 42 + "┘" + RESET)
 
         if invalid:
@@ -261,7 +261,7 @@ def _speed_submenu(
             f"  {C_DIM}(0.08s / cell)"
             f"{RESET}" + "\t" * 2 + "   " + C_BORDER + "│" + RESET)
         print(
-            C_BORDER + "│" + RESET + f"  {C_LABEL}[0]{RESET} ← Go back"
+            C_BORDER + "│" + RESET + f"  {C_LABEL}[0]{RESET} ← Go back" +
             "\t" * 3 + "   " + C_BORDER + "│" + RESET)
         print(C_BORDER + "└" + "─" * 42 + "┘" + RESET)
 
