@@ -48,24 +48,20 @@ def _write(text: str) -> None:
     sys.stdout.flush()
 
 
-def _print(text: str = "") -> None:
-    print(text)
-
-
 def _ok(msg: str) -> None:
-    _print(C_SUCCESS + "  ✓ " + msg + RESET)
+    print(C_SUCCESS + "  ✓ " + msg + RESET)
 
 
 def _err(msg: str) -> None:
-    _print(C_ERROR + "  ✗ " + msg + RESET)
+    print(C_ERROR + "  ✗ " + msg + RESET)
 
 
 def _warn(msg: str) -> None:
-    _print(C_WARN + "  ! " + msg + RESET)
+    print(C_WARN + "  ! " + msg + RESET)
 
 
 def _info(msg: str) -> None:
-    _print(C_LABEL + "  " + msg + RESET)
+    print(C_LABEL + "  " + msg + RESET)
 
 
 def _prompt(msg: str) -> Optional[str]:
@@ -74,10 +70,10 @@ def _prompt(msg: str) -> Optional[str]:
         try:
             return input(C_PROMPT + msg + RESET).strip()
         except KeyboardInterrupt:
-            _print()
+            print()
             _warn("Ctrl+C — use [0] or Ctrl+D to quit.")
         except EOFError:
-            _print()
+            print()
             return None
 
 
@@ -112,14 +108,7 @@ def _current_color_ref(renderer: MazeRenderer, key: str) -> str:
     return C_VALUE
 
 
-def _print_banner() -> None:
-    _print(C_BORDER + "╔══════════════════════════════════════════╗" + RESET)
-    _print(C_TITLE + "║          ·· A - M A Z E - I N G ··       ║" + RESET)
-    _print(C_BORDER + "╚══════════════════════════════════════════╝" + RESET)
-    _print()
-
-
-def _print_status(
+def print_status(
     config: MazeConfig,
     solution: SolutionResult,
     renderer: MazeRenderer,
@@ -128,7 +117,7 @@ def _print_status(
     path_state = "shown" if renderer.show_path else "hidden"
     speed_name = "Fast" if anim_speed <= SPEED_FAST else "Slow"
 
-    _print(C_BORDER + "─" * 44 + RESET)
+    print(C_BORDER + "─" * 44 + RESET)
     _info(
         f"Size: {config.width} x {config.height}  "
         f"Seed: {config.seed}  "
@@ -140,10 +129,10 @@ def _print_status(
         f"Path: {_val(path_state)}  "
         f"Speed: {_val(speed_name)}"
     )
-    _print(C_BORDER + "─" * 44 + RESET)
+    print(C_BORDER + "─" * 44 + RESET)
 
 
-def _print_menu(
+def print_menu(
     renderer: MazeRenderer,
     config: MazeConfig,
     anim_speed: float,
@@ -164,30 +153,30 @@ def _print_menu(
     L = C_LABEL
     V = C_VALUE
 
-    _print()
-    _print(W + "┌─ Actions " + "─" * 29 + "┐" + R)
-    _print(
+    print()
+    print(W + "┌─ Actions " + "─" * 29 + "┐" + R)
+    print(
         W + "│" + R + f"  {L}[1]{R} Re-generate maze" + "\t" * 3 + W + "│" + R)
-    _print(
+    print(
         W + "│" + R + f"  {L}[2]{R} Animated"
         " BFS solve" + "\t" * 2 + W + "│" + R)
-    _print(W + "│" + R + f"  {L}[3]{R} {path_label}" + "\t" * 3 + W + "│" + R)
-    _print(
+    print(W + "│" + R + f"  {L}[3]{R} {path_label}" + "\t" * 3 + W + "│" + R)
+    print(
         W + "│" + R + f"  {L}[4]{R} Wall color    {wall_ref}[{wall_name}]"
         f"{R}" + "\t" * 2 + W + "│" + R)
-    _print(
+    print(
         W + "│" + R + f"  {L}[5]{R} Path color    {path_ref}[{path_name}]"
         f"{R}" + "\t" * 2 + W + "│" + R)
-    _print(
+    print(
         W + "│" + R + f"  {L}[6]{R} Pattern color {pat_ref}[{pat_name}]"
         f"{R}" + "\t" * 2 + W + "│" + R)
-    _print(W + "│" + R + f"  {L}[7]{R} Anim speed    {V}[{speed_name}]{R}" +
+    print(W + "│" + R + f"  {L}[7]{R} Anim speed    {V}[{speed_name}]{R}" +
            "\t" * 2 + W + "│" + R)
-    _print(
+    print(
         W + "│" + R + f"  {L}[8]{R} Perfect mode  {V}[{config.perfect}]"
         f"{R}" + "\t" * 2 + W + "│" + R)
-    _print(W + "│" + R + f"  {L}[0]{R} Quit" + "\t" * 4 + W + "│" + R)
-    _print(W + "└" + "─" * 39 + "┘" + R)
+    print(W + "│" + R + f"  {L}[0]{R} Quit" + "\t" * 4 + W + "│" + R)
+    print(W + "└" + "─" * 39 + "┘" + R)
 
 
 def _color_submenu(
@@ -202,9 +191,9 @@ def _color_submenu(
     invalid = False
     while True:
         renderer.display(clear=True, delay=0)
-        _print_status(config, solution, renderer, anim_speed)
-        _print()
-        _print(
+        print_status(config, solution, renderer, anim_speed)
+        print()
+        print(
             C_BORDER + f"┌─ {title} " + "─" * (39 - len(title)) + "┐" + RESET)
 
         for i, (name, code) in enumerate(COLOR_OPTIONS, 1):
@@ -213,12 +202,12 @@ def _color_submenu(
             name_colored = f"\033[38;5;{code}m{name}{RESET}"
             line = f"  {num} {swatch} {name_colored}"
             pad = " " * max(0, 32 - len(name))
-            _print(
+            print(
                 C_BORDER + "│" + RESET + line + pad + C_BORDER + "│" + RESET)
 
-        _print(C_BORDER + "│" + RESET + f"  {C_LABEL}[ 0]{RESET} ← Go back" +
+        print(C_BORDER + "│" + RESET + f"  {C_LABEL}[ 0]{RESET} ← Go back" +
                "\t" * 3 + "   " + C_BORDER + "│" + RESET)
-        _print(C_BORDER + "└" + "─" * 42 + "┘" + RESET)
+        print(C_BORDER + "└" + "─" * 42 + "┘" + RESET)
 
         if invalid:
             _err("Please select a valid option.")
@@ -251,20 +240,20 @@ def _speed_submenu(
     invalid = False
     while True:
         renderer.display(clear=True, delay=0)
-        _print_status(config, solution, renderer, anim_speed)
-        _print()
-        _print(C_BORDER + "┌─ Animation Speed " + "─" * 24 + "┐" + RESET)
-        _print(
+        print_status(config, solution, renderer, anim_speed)
+        print()
+        print(C_BORDER + "┌─ Animation Speed " + "─" * 24 + "┐" + RESET)
+        print(
             C_BORDER + "│" + RESET + f"  {C_LABEL}[1]{RESET} Fast"
             f"  {C_DIM}(0.01s / cell)"
             f"{RESET}" + "\t" * 2 + "   " + C_BORDER + "│" + RESET)
-        _print(
+        print(
             C_BORDER + "│" + RESET + f"  {C_LABEL}[2]{RESET} Slow"
             f"  {C_DIM}(0.08s / cell)"
             f"{RESET}" + "\t" * 2 + "   " + C_BORDER + "│" + RESET)
-        _print(C_BORDER + "│" + RESET + f"  {C_LABEL}[0]{RESET} ← Go back" +
+        print(C_BORDER + "│" + RESET + f"  {C_LABEL}[0]{RESET} ← Go back" +
                "\t" * 3 + "   " + C_BORDER + "│" + RESET)
-        _print(C_BORDER + "└" + "─" * 42 + "┘" + RESET)
+        print(C_BORDER + "└" + "─" * 42 + "┘" + RESET)
 
         if invalid:
             _err("Please select 0, 1, or 2.")
@@ -344,7 +333,7 @@ def _animate_solve(
             length=max(0, len(path) - 1),
         )
     except KeyboardInterrupt:
-        _print()
+        print()
         _warn("Animation interrupted — showing static result.")
     except ValueError as exc:
         raise RuntimeError(str(exc)) from exc
@@ -402,7 +391,7 @@ def _err_inline(msg: str) -> None:
     """Print error above current prompt without adding new prompt."""
     sys.stdout.write("\033[F")
     sys.stdout.write("\033[K")
-    _print(C_ERROR + "  ✗ " + msg + RESET)
+    print(C_ERROR + "  ✗ " + msg + RESET)
 
 
 def _loop(config: MazeConfig) -> int:
@@ -415,12 +404,12 @@ def _loop(config: MazeConfig) -> int:
 
     renderer = _create_renderer(generator, solution)
     renderer.display(clear=True, delay=0.001)
-    _print_status(config, solution, renderer, anim_speed)
+    print_status(config, solution, renderer, anim_speed)
 
     choice_flag = True
     while True:
         if choice_flag:
-            _print_menu(renderer, config, anim_speed)
+            print_menu(renderer, config, anim_speed)
 
         choice_flag = True
         choice = _prompt("Choice (0-8): ")
@@ -463,7 +452,7 @@ def _loop(config: MazeConfig) -> int:
                 _save_output(generator, config.output_file)
                 renderer = _create_renderer(generator, solution)
                 renderer.display(clear=True, delay=0.001)
-                _print_status(config, solution, renderer, anim_speed)
+                print_status(config, solution, renderer, anim_speed)
                 _ok("New maze generated.")
             except RuntimeError as exc:
                 _err(str(exc))
@@ -475,7 +464,7 @@ def _loop(config: MazeConfig) -> int:
                 solution = _animate_solve(
                     config, generator, renderer, anim_speed
                 )
-                _print_status(config, solution, renderer, anim_speed)
+                print_status(config, solution, renderer, anim_speed)
                 _ok("Shortest path found and displayed.")
             except RuntimeError as exc:
                 _err(str(exc))
@@ -485,7 +474,7 @@ def _loop(config: MazeConfig) -> int:
         if choice == "3":
             renderer.toggle_path()
             renderer.display(clear=True, delay=0)
-            _print_status(config, solution, renderer, anim_speed)
+            print_status(config, solution, renderer, anim_speed)
             state = "shown" if renderer.show_path else "hidden"
             _ok(f"Path is now {state}.")
             continue
@@ -498,7 +487,7 @@ def _loop(config: MazeConfig) -> int:
                 _info("Goodbye.")
                 return 0
             renderer.display(clear=True, delay=0)
-            _print_status(config, solution, renderer, anim_speed)
+            print_status(config, solution, renderer, anim_speed)
             continue
 
         if choice == "5":
@@ -509,7 +498,7 @@ def _loop(config: MazeConfig) -> int:
                 _info("Goodbye.")
                 return 0
             renderer.display(clear=True, delay=0)
-            _print_status(config, solution, renderer, anim_speed)
+            print_status(config, solution, renderer, anim_speed)
             continue
 
         if choice == "6":
@@ -520,7 +509,7 @@ def _loop(config: MazeConfig) -> int:
                 _info("Goodbye.")
                 return 0
             renderer.display(clear=True, delay=0)
-            _print_status(config, solution, renderer, anim_speed)
+            print_status(config, solution, renderer, anim_speed)
             continue
 
         if choice == "7":
@@ -532,7 +521,7 @@ def _loop(config: MazeConfig) -> int:
                 return 0
             anim_speed = new_speed
             renderer.display(clear=True, delay=0)
-            _print_status(config, solution, renderer, anim_speed)
+            print_status(config, solution, renderer, anim_speed)
             continue
 
         if choice == "8":
@@ -566,11 +555,10 @@ def main() -> int:
         return 1
 
     try:
-        _print_banner()
         _info(f"Loading config: {sys.argv[1]}")
         config = ConfigParser.parse(sys.argv[1])
     except KeyboardInterrupt:
-        _print()
+        print()
         _err("Interrupted during startup.")
         return 1
     except ConfigError as exc:
@@ -584,7 +572,7 @@ def main() -> int:
         try:
             return _loop(config)
         except KeyboardInterrupt:
-            _print()
+            print()
             _warn("Ctrl+C — use [0] or Ctrl+D to quit.")
         except RuntimeError as exc:
             _err(str(exc))
