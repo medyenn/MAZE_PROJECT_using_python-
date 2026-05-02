@@ -27,16 +27,16 @@ C_WARN = "\033[38;5;214m"
 COLOR_OPTIONS = [
     ("Green",     40),
     ("Cyan",      51),
-    ("Blue",      21),
-    ("Purple",    93),
+    ("Blue",      27),
+    ("Purple",    57),
     ("Pink",     213),
     ("Orange",   202),
     ("Yellow",   226),
     ("Red",      196),
-    ("Teal",      36),
-    ("Lavender", 183),
+    ("Teal",      30),
+    ("Lavender", 141),
     ("White",    255),
-    ("Crimson",  160),
+    ("Crimson",  88),
 ]
 
 SPEED_FAST = 0.01

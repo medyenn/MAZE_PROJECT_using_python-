@@ -22,9 +22,9 @@ DEFAULT_COLORS: Dict[str, str] = {
     "floor":   RESET,
     "entry":   color(226),
     "exit":    color(196),
-    "path":    color(21),
+    "path":    color(20),
     "visited": color(39),
-    "pattern": color(27),
+    "pattern": color(52),
 }
 
 
